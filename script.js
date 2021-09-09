@@ -25,6 +25,7 @@ let meats = [
 ];
 
 let toppings = [
+  "&nbsp",
   "tomato",
   "lettuce",
   "raw onions",
@@ -37,11 +38,19 @@ let toppings = [
 
 function createToppingOptions() {
   toppings.forEach((topping) => {
-    const toppingOption = `
-        <option value=${topping}>${
-      topping[0].toUpperCase() + topping.slice(1)
-    }</option>
+    let toppingOption;
+    if (topping === "&nbsp") {
+      console.log("empty topping");
+      toppingOption = `
+        <option value="" selected disabled hidden>Choose here</option>
       `;
+    } else {
+      toppingOption = `
+        <option value=${topping}>${
+        topping[0].toUpperCase() + topping.slice(1)
+      }</option>
+      `;
+    }
     toppingSelect.innerHTML += toppingOption;
   });
 }
