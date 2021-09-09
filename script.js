@@ -1,5 +1,6 @@
 /* DOM Imports */
 const toppingSelect = document.querySelector("#topping-1");
+const deleteBtns = document.querySelectorAll("button.delete");
 
 /* Sandwhich options */
 
@@ -55,4 +56,12 @@ function createToppingOptions() {
   });
 }
 
+function createDeleteListener(deleteBtn) {
+  deleteBtn.addEventListener("click", (e) => {
+    const parent = deleteBtn.parentElement;
+    parent.remove();
+  });
+}
+
 createToppingOptions();
+createDeleteListener(deleteBtns[0]);
