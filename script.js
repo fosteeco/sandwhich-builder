@@ -1,12 +1,15 @@
 /* DOM Imports */
 const toppingSelect = document.querySelector("#topping-1");
+const breadSelect = document.querySelector("#bread");
 const deleteBtns = document.querySelectorAll("button.delete");
 
 /* Sandwhich options */
 
 let sandwhich = [];
+let deleted = [];
 
 let breads = [
+  "&nbsp",
   "italian",
   "kaiser",
   "white",
@@ -37,6 +40,25 @@ let toppings = [
   "bell peppers",
 ];
 
+function createBreadOptions() {
+  breads.forEach((bread) => {
+    let breadOption;
+    if (bread === "&nbsp") {
+      console.log("empty topping");
+      breadOption = `
+        <option value="" selected disabled hidden>Choose here</option>
+      `;
+    } else {
+      breadOption = `
+        <option value=${bread}>${
+        bread[0].toUpperCase() + bread.slice(1)
+      }</option>
+      `;
+    }
+    breadSelect.innerHTML += breadOption;
+  });
+}
+
 function createToppingOptions() {
   toppings.forEach((topping) => {
     let toppingOption;
@@ -59,9 +81,12 @@ function createToppingOptions() {
 function createDeleteListener(deleteBtn) {
   deleteBtn.addEventListener("click", (e) => {
     const parent = deleteBtn.parentElement;
+    deleted.push(parent);
+    console.log(deleted);
     parent.remove();
   });
 }
 
+createBreadOptions();
 createToppingOptions();
 createDeleteListener(deleteBtns[0]);
